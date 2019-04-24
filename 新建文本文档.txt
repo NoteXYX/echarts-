@@ -1,0 +1,106 @@
+function paint(){
+ 
+var geli=[[[0,1,19],[3,0,17],[5,5,38],[4,3,50],[0,4,31],[5,0,23],[5,1,15]]];
+    
+    var meidi= [[[3,0,16],[5,0,48],[5,1,30],[3,5,10],[2,2,33],[5,3,20]]];
+    
+    var xiaotiane= [[[2,1,26],[1,1,38],[2,2,100],[5,3,30],[4,5,19],[1,4,29]]];
+
+    	// 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+        	    tooltip : {
+        	        trigger: 'axis',
+        	        showDelay : 0,
+        	        axisPointer:{
+        	            show: true,
+        	            type : 'cross',
+        	            lineStyle: {
+        	                type : 'dashed',
+        	                width : 1
+        	            }
+        	        }
+        	    },
+        	    legend: {
+        	        data:['格力','美的','小天鹅']
+        	    },
+        	    toolbox: {
+        	        show : true,
+        	        feature : {
+        	            mark : {show: true},
+        	            dataZoom : {show: true},
+        	            dataView : {show: true, readOnly: false},
+        	            restore : {show: true},
+        	            saveAsImage : {show: true}
+        	        }
+        	    },
+        	    xAxis : [
+        	        {
+        	        	type : 'value',
+        	            splitNumber: 4,
+        	            scale: true,
+        	            axisLabel : {
+        	                formatter: '方法{value}'
+        	            }
+        	        }
+        	    ],
+        	    yAxis : [
+        	        {
+        	        	  type : 'value',
+          	            splitNumber: 4,
+          	            scale: true,
+          	            axisLabel : {
+          	                formatter: '领域{value}'
+          	            }
+        	            
+        	        }
+        	    ],
+        	   
+        	    series : [
+        	        {
+        	            name:'格力',
+        	            type:'scatter',
+        	            symbolSize: function (geli){
+        	                return Math.round(geli[2]);
+        	            },
+        	            tooltip : {
+        	                   trigger: 'item',
+        	                   formatter:'格力（方法，领域，数量）: {c0}'
+        	            },
+        	            data: geli[0]
+        	        },
+        	        
+        	        {
+        	            name:'美的',
+        	            type:'scatter',
+        	            symbolSize: function (meidi){
+        	                return Math.round(meidi[2]);
+        	            },
+        	            tooltip : {
+     	                   trigger: 'item',
+     	                   formatter:'美的（方法，领域，数量）: {c0}'
+     	            },
+        	            data:meidi[0]
+        	        },
+        	        {
+        	            name:'小天鹅',
+        	            type:'scatter',
+        	            symbolSize: function (xiaotiane){
+        	                return Math.round(xiaotiane[2]);
+        	            },
+        	            tooltip : {
+     	                   trigger: 'item',
+     	                   formatter:'小天鹅（方法，领域，数量）: {c0}'
+     	            },
+        	            data: xiaotiane[0]
+        	        }
+        	    ]
+        	};
+
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);  
+    }
